@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <head th:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    </head>
+    <head th:fragment="js">
+        <script
+                src="https://code.jquery.com/jquery-3.4.1.min.js"
+                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFIBw8HfCJo="
+                crossorigin="anonymous"
+        ></script>
+        <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+    </head>
+</head>
+<body>
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand font-weight-bold text-warning" href="#">BOBAXIXIXI</a>
+    <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+
+        <ul class="navbar-nav mr-auto">
+            <p class="nav-item nav-link active text-secondary">Store</p>
+            <p class="nav-item nav-link active text-secondary">Boba Tea</p>
+            <p class="nav-item nav-link active text-secondary">Search</p>
+            <p class="nav-item nav-link active text-secondary">Filter</p>
+        </ul>
+    </div>
+</nav>
+<!--        <ul class="navbar-nav mr-auto">-->
+<!--            <a th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'font-weight-bold':''}" class="nav-item nav-link active text-secondary" th:href="@{/}">-->
+<!--                Home<span class="sr-only">(current)</span>-->
+<!--            </a>-->
+<!--            <a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/bioskop') ? 'font-weight-bold':''}" class="nav-item nav-link active text-secondary" th:href="@{/bioskop/viewall}">-->
+<!--                Bioskop<span class="sr-only">(current)</span>-->
+<!--            </a>-->
+<!--            <a  th:classappend="${#httpServletRequest.getRequestURI().startsWith('/film') ? 'font-weight-bold':''}" class="nav-item nav-link active text-secondary" th:href="@{/film/viewall}">-->
+<!--                Film<span class="sr-only">(current)</span>-->
+<!--            </a>-->
+<!--        </ul>-->
+<!--        <form class="form-inline my-2 my-lg-0" th:action="@{/bioskop/view}" method="GET">-->
+<!--            <input class="form-control mr-sm-2" type="search"-->
+<!--                   name="noBioskop" placeholder="No Bioskop" aria-label="Search">-->
+<!--            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>-->
+<!--        </form>-->
+<!--<footer th:fragment="footer(halaman)" class="footer">-->
+<!--    <p th:text="${halaman}"></p>-->
+<!--</footer>-->
+</body>
+</html>
