@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>Boba Assigned</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('assigned-bobatea-to-store')"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2 th:text="'Boba Tea successfully updated for store ' + ${namaStore}"></h2>
+                <a th:href="@{/store/view/} + ${idStore}">Back to List of Store Detail</a>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Size</th>
+                        <th>Ice</th>
+                        <th>Sugar</th>
+                        <th>Topping</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="storebobatea, iterationStatus: ${listBobateaInStore}">
+                        <td th:text="${storebobatea.bobatea.namaBobatea}"> </td>
+                        <td th:text="${storebobatea.bobatea.hargaBobatea}"> </td>
+                        <td th:if="${storebobatea.bobatea.sizeBobatea} == 0">S</td>
+                        <td th:if="${storebobatea.bobatea.sizeBobatea} == 1">M</td>
+                        <td th:if="${storebobatea.bobatea.sizeBobatea} == 2">L</td>
+                        <td th:if="${storebobatea.bobatea.iceLevel} == 0">Less</td>
+                        <td th:if="${storebobatea.bobatea.iceLevel} == 1">Normal</td>
+                        <td th:if="${storebobatea.bobatea.iceLevel} == 2">Extra</td>
+                        <td th:if="${storebobatea.bobatea.sugarLevel} == 0">Less</td>
+                        <td th:if="${storebobatea.bobatea.sugarLevel} == 1">Normal</td>
+                        <td th:if="${storebobatea.bobatea.sugarLevel} == 2">Extra</td>
+                        <div th:if="${(storebobatea.bobatea.topping == null)}">
+                            <td th:text="'No Topping'"> </td>
+                        </div>
+                        <div th:if="${(storebobatea.bobatea.topping != null)}">
+                            <td th:text="${storebobatea.bobatea.topping.namaTopping}"> </td>
+                        </div>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

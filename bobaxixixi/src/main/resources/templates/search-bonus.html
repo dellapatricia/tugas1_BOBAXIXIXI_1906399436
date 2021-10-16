@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>Form Add Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('form-add-store')"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <form class="form-inline my-2 my-lg-0" th:action="@{/bonus}" method="POST">
+                    <input class="form-control mr-sm-2" type="search"
+                           name="keyword" placeholder="Cari boba atau store.." aria-label="Search">
+                    <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+                    <div th:if="${(post == true)}">
+                        <div class="container">
+                            <h3> Bobatea</h3>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Size</th>
+                                <th>Ice</th>
+                                <th>Sugar</th>
+                                <th>Topping</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="bobatea, iterationStatus: ${listBobatea}">
+                                <td th:text="${iterationStatus.count}"> </td>
+                                <td th:text="${bobatea.namaBobatea}"> </td>
+                                <td th:text="${bobatea.hargaBobatea}"> </td>
+                                <td th:if="${bobatea.sizeBobatea} == 0">S</td>
+                                <td th:if="${bobatea.sizeBobatea} == 1">M</td>
+                                <td th:if="${bobatea.sizeBobatea} == 2">L</td>
+                                <td th:if="${bobatea.iceLevel} == 0">Less</td>
+                                <td th:if="${bobatea.iceLevel} == 1">Normal</td>
+                                <td th:if="${bobatea.iceLevel} == 2">Extra</td>
+                                <td th:if="${bobatea.sugarLevel} == 0">Less</td>
+                                <td th:if="${bobatea.sugarLevel} == 1">Normal</td>
+                                <td th:if="${bobatea.sugarLevel} == 2">Extra</td>
+                                <div th:if="${(bobatea.topping == null)}">
+                                    <td th:text="'No Topping'"> </td>
+                                </div>
+                                <div th:if="${(bobatea.topping != null)}">
+                                    <td th:text="${bobatea.topping.namaTopping}"> </td>
+                                </div>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                        <br><br>
+                        <div class="container">
+                        <h3> Store</h3>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Store Code</th>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Operational Hour</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="store, iterationStatus: ${listStore}">
+                                <td th:text="${iterationStatus.count}"> </td>
+                                <td th:text="${store.storeCode}"> </td>
+                                <td th:text="${store.namaStore}"> </td>
+                                <td th:text="${store.alamatStore}"> </td>
+                                <td th:text="${store.openHour} + '-' + ${store.closeHour} "> </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

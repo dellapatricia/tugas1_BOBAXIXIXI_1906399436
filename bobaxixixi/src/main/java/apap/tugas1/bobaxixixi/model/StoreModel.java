@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -31,19 +33,17 @@ public class StoreModel implements Serializable{
     @Column(nullable=false)
     private String alamatStore;
 
-
     @NotNull
     @Size
     @Column(nullable=false)
     private String namaStore;
 
+//    @NotNull
+//    @Size(max=30)
+//    @Column(nullable=false)
+//    private String noTelp;
     @NotNull
-    @Size(max=30)
-    @Column(nullable=false)
-    private String noTelp;
-
-    @NotNull
-    @Size
+    @Size(max=10)
     @Column(nullable=false)
     private String storeCode;
 
@@ -58,22 +58,12 @@ public class StoreModel implements Serializable{
     private LocalTime closeHour;
 
     //Relasi dengan ManagerModel
-    @OneToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "id_manager", referencedColumnName = "idManager", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_manager", referencedColumnName = "idManager")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ManagerModel manager;
 
     //Relasi dengan BobateaModel
-    @ManyToMany
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long idStoreBobatea;
-    @JoinTable(
-            name = "store_bobatea",
-            joinColumns = @JoinColumn(name = "id_store"),
-            inverseJoinColumns = @JoinColumn(name = "id_boba")
-            )
-    @Column(nullable=false)
-    private String productionCode;
-    List<BobateaModel> listBobatea;
+    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<StoreBobateaModel> listStoreBobatea;
 }

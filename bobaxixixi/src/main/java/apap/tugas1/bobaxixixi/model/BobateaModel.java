@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -27,34 +29,32 @@ public class BobateaModel implements Serializable {
 
     @NotNull
     @Size
-    @Column(nullable=false)
+    @Column
     private String namaBobatea;
 
     @NotNull
-    @Size
-    @Column(nullable=false)
-    private Long hargaBobatea;
+    @Column
+    private Integer hargaBobatea;
 
     @NotNull
-    @Size
-    @Column(nullable=false)
-    private String sizeBobatea;
+    @Column
+    private Integer sizeBobatea;
 
     @NotNull
-    @Size
-    @Column(nullable=false)
-    private String iceLevel;
+    @Column
+    private Integer iceLevel;
 
     @NotNull
-    @Size
-    @Column(nullable=false)
-    private String sugarLevel;
+    @Column
+    private Integer sugarLevel;
 
-    @ManyToMany(mappedBy = "listBobatea")
-    List<StoreModel> listStore;
+//    @ManyToMany(mappedBy = "listBobatea")
+//    List<StoreModel> listStore;
+    @OneToMany(mappedBy = "bobatea", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<StoreBobateaModel> listStoreBobatea;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "id_topping", referencedColumnName = "idTopping", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_topping", referencedColumnName = "idTopping")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ToppingModel topping;
 

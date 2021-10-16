@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>Form Add Boba</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('form-add-bobatea')"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>Add Bobatea</h2>
+                <br>
+                <div th:switch="${(clicked == false)}">
+                    <div class="alert alert-warning" th:case="${(((sugarLevel == 3)&&(iceLevel == 3))&&(size == 3))}">
+                        Please fill out the Boba Tea's Size, Sugar Level and Ice Level!
+                    </div>
+                    <div class="alert alert-warning" th:case="${((sugarLevel == 3)&&(iceLevel == 3))}">
+                        Please fill out the Boba Tea's Sugar Level and Ice Level!
+                    </div>
+                    <div class="alert alert-warning" th:case="${((size == 3)&&(iceLevel == 3))}">
+                        Please fill out the Boba Tea's Size and Ice Level!
+                    </div>
+                    <div class="alert alert-warning" th:case="${((size == 3)&&(sugarLevel == 3))}">
+                        Please fill out the Boba Tea's Size and Sugar Level!
+                    </div>
+                    <div class="alert alert-warning" th:case="${(iceLevel == 3)}">
+                        Please fill out the Boba Tea's Ice Level!
+                    </div>
+                    <div class="alert alert-warning" th:case="${(sugarLevel == 3)}">
+                        Please fill out the Boba Tea's Sugar Level!
+                    </div>
+                    <div class="alert alert-warning" th:case="${(size == 3)}">
+                        Please fill out the Boba Tea's Size!
+                    </div>
+                </div>
+
+                <form th:action="@{/boba/add/}" th:object="${bobatea}" method="POST">
+                    Boba Tea Name <br>
+                    <input required class="form-control" type="text" name="namaBobatea" th:value="${namaBobatea}"/>
+                    <br><br>
+
+                    Price <br>
+                    <input required class="form-control" type="number" name="hargaBobatea" th:value="${hargaBobatea}"/>
+                    <br><br>
+
+                    Size <br>
+                    <select th:field="*{sizeBobatea}">
+                        <option value=3 th:text="'-- Select Size --'"></option>
+                        <option value=0 th:text="'S'"></option>
+                        <option value=1 th:text="'M'"></option>
+                        <option value=2 th:text="'L'"></option>
+                    </select>
+                    <br><br>
+
+                    Sugar Level <br>
+                    <select  th:field="*{sugarLevel}">
+                        <option value=3 th:text="'-- Select a Sugar Level --'"></option>
+                        <option value=0 th:text="'Less'"></option>
+                        <option value=1 th:text="'Normal'"></option>
+                        <option value=2 th:text="'Extra'"></option>
+                    </select>
+                    <br><br>
+
+                    Ice Level <br>
+                    <select th:field="*{iceLevel}">
+                        <option value=3 th:text="'-- Select an Ice Level --'"></option>
+                        <option value=0 th:text="'Less'"></option>
+                        <option value=1 th:text="'Normal'"></option>
+                        <option value=2 th:text="'Extra'"></option>
+                    </select>
+                    <br><br>
+
+                    Topping <br>
+                    <tr>
+                        <td>
+                            <select th:field="*{topping}">
+                                <option th:value="null" th:text="'-- Select a Topping --'"></option>
+                                <option th:each="eachTopping : ${listTopping}"
+                                        th:value="${eachTopping.idTopping}"
+                                        th:text="${eachTopping.namaTopping}">
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <br><br>
+
+
+                    <button class="btn btn-primary" type="submit">
+                        Save
+                    </button>
+
+                    <a class="btn btn-primary" href="/boba">
+                        Cancel
+                    </a>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

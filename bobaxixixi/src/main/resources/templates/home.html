@@ -9,16 +9,16 @@
 </head>
 
 <body>
-<nav th:replace="fragments/fragment :: navbar"></nav>
+<nav th:replace="fragments/fragment :: navbar('home')"></nav>
 <div class = "container">
     <div class="jumbotron">
-        <h1 class="display-3 text-center">Hello, world!</h1>
+        <h1 class="display-3 text-center">WELCOME TO BOBAXIXIXI!</h1>
     </div>
     <div class="d-flex justify-content-center">
-        <a th:href="@{/#}" class="mx-2 btn btn-warning">Store</a>
-        <a th:href="@{/#}" class="mx-2 btn btn-warning">Boba Tea</a>
-        <a th:href="@{/#}" class="mx-2 btn btn-warning">Search</a>
-        <a th:href="@{/#}" class="mx-2 btn btn-warning">Filter</a>
+        <a th:href="@{/store}" class="mx-2 btn btn-warning">Store</a>
+        <a th:href="@{/boba}" class="mx-2 btn btn-warning">Boba Tea</a>
+        <a th:href="@{/search}" class="mx-2 btn btn-warning">Search</a>
+        <a th:href="@{/filter/manager}" class="mx-2 btn btn-warning">Filter</a>
     </div>
 </div>
 <!--<footer th:replace="fragments/fragment :: footer('Home')">-->

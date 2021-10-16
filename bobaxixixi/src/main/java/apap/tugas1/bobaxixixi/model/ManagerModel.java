@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -26,7 +27,7 @@ public class ManagerModel implements Serializable {
     private Long idManager;
 
     @NotNull
-    @Size(max = 30)
+    @Size
     @Column(nullable = false)
     private String fullName;
 
@@ -36,10 +37,12 @@ public class ManagerModel implements Serializable {
 
     @NotNull
     @Column(nullable=false)
-    @DateTimeFormat(pattern= "dd/MM/yyyy")
-    private LocalTime dateBirth;
+    @DateTimeFormat(pattern= "yyyy-MM-dd")
+    private Date dateBirth;
 
-    @OneToOne(mappedBy="manager", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-    private List<StoreModel> listStore;
+    @OneToOne(mappedBy = "manager", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private StoreModel storeModel;
+
 
 }

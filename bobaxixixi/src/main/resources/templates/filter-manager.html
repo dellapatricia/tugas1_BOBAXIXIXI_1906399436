@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>Filter Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('filter-manager')"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>Filter Manager</h2> <br>
+                <form th:action="@{/filter/manager}" th:object="${bobatea}" method="GET">
+                Boba Name<br>
+                <select name="nameBoba">
+                    <option th:each="bobatea : ${listBobatea}"
+                            th:value="${bobatea.namaBobatea}"
+                            th:text="${bobatea.namaBobatea}">
+                    </option>
+                </select>
+                <button class="btn btn-primary" type="submit">
+                    Search
+                </button>
+                </form>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Gender</th>
+                        <th>Date of Birth</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="manager, iterationStatus: ${listManager}">
+                        <td th:text="${iterationStatus.count}"> </td>
+                        <td th:text="${manager.fullName}"> </td>
+                        <td th:if="${manager.jenisKelamin} == 1">Laki-laki</td>
+                        <td th:if="${manager.jenisKelamin} == 0">Perempuan</td>
+                        <td th:text="${manager.dateBirth}"> </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

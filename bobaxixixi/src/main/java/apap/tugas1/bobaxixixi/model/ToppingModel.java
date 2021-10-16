@@ -32,11 +32,8 @@ public class ToppingModel implements Serializable {
     private String namaTopping;
 
     @NotNull
-    @Size
     @Column(nullable=false)
-    private Long hargaTopping;
+    private Integer hargaTopping;
 
-    @OneToMany(mappedBy="bobatea", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-    private List<BobateaModel> listBobatea;
 
 }

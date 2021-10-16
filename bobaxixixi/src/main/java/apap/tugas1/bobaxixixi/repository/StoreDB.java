@@ -9,4 +9,5 @@ import java.util.List;
 
 @Repository
 public interface StoreDB extends JpaRepository<StoreModel,Long> {
+//    Optional<StoreModel> findById(Long id);
 }
